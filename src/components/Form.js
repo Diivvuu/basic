@@ -1,6 +1,6 @@
 import React from "react";
 import useFormValidation from "../hooks/useFormValidation";
-//fields - name, email, age, are you ateend with a guest?, guest name
+// fields - name, email, age, are you attending with a guest?, guest name
 const validateForm = (values) => {
   const errors = {};
   if (!values.name)
@@ -24,6 +24,7 @@ const validateForm = (values) => {
 
   return errors;
 };
+
 const Form = () => {
   const { formData, errors, handleChange, handleSubmit } = useFormValidation(
     {
@@ -35,54 +36,73 @@ const Form = () => {
     },
     validateForm
   );
+
   const submitForm = () => {
     alert(`Form Submitted Successfully`);
   };
+
   return (
-    <div className="h-screen w-full mx-auto bg-zinc-600">
+    <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <form
-        className="flex flex-col justify-center items-center pt-24"
+        className="w-[80%] max-w-lg bg-white p-8 rounded-lg shadow-lg transform transition duration-500 hover:scale-105"
         onSubmit={handleSubmit(submitForm)}
       >
-        <div className="flex">
-          <label className="">Name</label>
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-700">
+          Sign Up
+        </h2>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Name
+          </label>
           <input
             name="name"
             type="text"
             value={formData.name}
-            className=""
+            className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:shadow-outline transition duration-300"
             onChange={handleChange}
           />
-          {errors.name && <span>{errors.name}</span>}
+          {errors.name && (
+            <span className="text-red-500 text-sm">{errors.name}</span>
+          )}
         </div>
-        <div>
-          <label className="">Email</label>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Email
+          </label>
           <input
             name="email"
             type="email"
             value={formData.email}
-            className=""
+            className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:shadow-outline transition duration-300"
             onChange={handleChange}
           />
-          {errors.email && <span>{errors.email}</span>}
+          {errors.email && (
+            <span className="text-red-500 text-sm">{errors.email}</span>
+          )}
         </div>
-        <div>
-          <label className="">Age</label>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Age
+          </label>
           <input
             name="age"
             type="number"
             value={formData.age}
-            className=""
+            className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:shadow-outline transition duration-300"
             onChange={handleChange}
           />
-          {errors.age && <span>{errors.age}</span>}
+          {errors.age && (
+            <span className="text-red-500 text-sm">{errors.age}</span>
+          )}
         </div>
-        <div>
-          <label className="">Are you attending with a guest?</label>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Are you attending with a guest?
+          </label>
           <select
             name="attendingWithGuest"
             value={formData.attendingWithGuest}
-            className=""
+            className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:shadow-outline transition duration-300"
             onChange={handleChange}
           >
             <option value="No">No</option>
@@ -90,18 +110,28 @@ const Form = () => {
           </select>
         </div>
         {formData.attendingWithGuest === "Yes" && (
-          <div>
-            <label>Guest Name : </label>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Guest Name
+            </label>
             <input
               name="guestName"
               type="text"
               value={formData.guestName}
+              className="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:shadow-outline transition duration-300"
               onChange={handleChange}
             />
-            {errors.guestName && <span>{errors.guestName}</span>}
+            {errors.guestName && (
+              <span className="text-red-500 text-sm">{errors.guestName}</span>
+            )}
           </div>
         )}
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-300"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
