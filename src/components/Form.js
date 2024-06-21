@@ -25,31 +25,83 @@ const validateForm = (values) => {
   return errors;
 };
 const Form = () => {
-  const { formData, errors, handleChange, handleSubmit } = useFormValidation();
+  const { formData, errors, handleChange, handleSubmit } = useFormValidation(
+    {
+      name: "",
+      email: "",
+      age: "",
+      attendingWithGuest: "",
+      guestName: "",
+    },
+    validateForm
+  );
+  const submitForm = () => {
+    alert(`Form Submitted Successfully`);
+  };
   return (
     <div className="h-screen w-full mx-auto bg-zinc-600">
-      <form className="flex flex-col justify-center items-center pt-24">
+      <form
+        className="flex flex-col justify-center items-center pt-24"
+        onSubmit={handleSubmit(submitForm)}
+      >
         <div className="flex">
           <label className="">Name</label>
-          <input name="name" type="text" className="" />
+          <input
+            name="name"
+            type="text"
+            value={formData.name}
+            className=""
+            onChange={handleChange}
+          />
+          {errors.name && <span>{errors.name}</span>}
         </div>
         <div>
           <label className="">Email</label>
-          <input name="" type="" className="" />
+          <input
+            name="email"
+            type="email"
+            value={formData.email}
+            className=""
+            onChange={handleChange}
+          />
+          {errors.email && <span>{errors.email}</span>}
         </div>
         <div>
           <label className="">Age</label>
-          <input name="" type="" className="" />
+          <input
+            name="age"
+            type="number"
+            value={formData.age}
+            className=""
+            onChange={handleChange}
+          />
+          {errors.age && <span>{errors.age}</span>}
         </div>
         <div>
           <label className="">Are you attending with a guest?</label>
-          <input
-            name=""
-            type=""
+          <select
+            name="attendingWithGuest"
+            value={formData.attendingWithGuest}
             className=""
-            placeholder="Are you attending with a guest"
-          />
+            onChange={handleChange}
+          >
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
         </div>
+        {formData.attendingWithGuest === "Yes" && (
+          <div>
+            <label>Guest Name : </label>
+            <input
+              name="guestName"
+              type="text"
+              value={formData.guestName}
+              onChange={handleChange}
+            />
+            {errors.guestName && <span>{errors.guestName}</span>}
+          </div>
+        )}
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
