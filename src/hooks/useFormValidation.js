@@ -12,9 +12,19 @@ const useFormValidation = (initialState, validate) => {
     });
   };
   const handleSubmit = (callback) => (e) => {
-      e.preventDefault();
-      const validationErrors = validate(formData);
-      
+    e.preventDefault();
+    const validationErrors = validate(formData);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      callback();
+    }
+  };
+
+  return {
+    formData,
+    errors,
+    handleChange,
+    handleSubmit,
   };
 };
 export default useFormValidation;
