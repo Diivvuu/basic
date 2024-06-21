@@ -1,10 +1,10 @@
 import React from "react";
+import Form from "./components/Form";
 
 const App = () => {
   return (
     <div className="App">
-      <h1>Event Registration</h1>
-      {/* <EventRegistrationForm /> */}
+      <Form />
     </div>
   );
 };
